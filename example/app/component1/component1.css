@@ -1,0 +1,20 @@
+.rc-online-menu .col-2, .rc-online-menu .col-8 {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.rc-online-menu .row {
+  margin-right: 0px;
+  margin-left: 0px; }
+
+.rc-online-menu .rc-header-online-warning {
+  background-color: #fbefa3;
+  border: 1px solid #f3cc5c;
+  text-align: center;
+  font-family: HelveticaNeueW01-55Roma,HelveticaNeueW02-55Roma,HelveticaNeueW10-55Roma,Helvetica Neue,Helvetica,Arial,\\30E1\30A4\30EA\30AA,meiryo,\\30D2\30E9\30AE\30CE\89D2\30B4 pro w3,hiragino kaku gothic pro;
+  font-size: 14px;
+  box-shadow: 0 1px 3px 0 rgba(32, 28, 4, 0.25);
+  overflow: hidden;
+  min-height: 4vh;
+  height: auto;
+  width: 100%;
+  padding: 4vh; }

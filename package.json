@@ -1,0 +1,17 @@
+{
+  "name": "scss-2-css",
+  "version": "1.0.0",
+  "description": "create css files for scss files inside components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yaswanthsvist@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "path": "^0.12.7"
+  }
+}
