@@ -1,39 +1,45 @@
-var fs = require( 'fs' );
 var path = require( 'path' );
 var gulp=require("gulp");
 var sass=require("gulp-sass");
+var chokidar = require('chokidar');
 var process=require("process")
 process.setMaxListeners(0);
-var findNConvertInPresentAndChildFolders=(prev='.',pres='.',itterate=true)=>{
-	let content=fs.readdir(`${prev}/${pres}`,(err,files)=>{
-		if(err){
-			return;
-		}
-		files.forEach(x=>{
-			fs.lstat(`${prev}/${pres}/${x}`,(err,stats)=>{
-				if(err){
-					return;
-				}
-				if(stats.isFile()){
-					if(x.includes(".scss")){
-						let conv=(previous,present,file)=>{
-							gulp.src(`${previous}/${present}/${file}`)
-							.pipe(sass().on('error', sass.logError))
-							.pipe(gulp.dest(`${previous}/${present}`))
-						};
-						fs.watchFile(`${prev}/${pres}/${x}`,(cur,pre)=>{
-							console.log(`${prev}/${pres}/${x} has changed`);
-							conv(prev,pres,x)
-						});
-						conv(prev,pres,x);
-					}
-				}
-				
-				if(stats.isDirectory()&&itterate){
-					findNConvertInPresentAndChildFolders(`${prev}/${pres}`,`${x}`);
-				}
-			});
-		});
+
+let convertFromScssToCss=(fullpath)=>{
+	gulp.src(fullpath)
+	.pipe(sass().on('error', sass.logError))
+	.pipe(gulp.dest(path.dirname(fullpath)))
+};
+						
+let findNConvertInPresentAndSubFolders=(presentDir='.')=>{
+	var watcher=chokidar.watch(presentDir, {
+	  ignored: '*.js',
+	  ignoreInitial: false,
+	  followSymlinks: true,
+	  cwd: '.',
+	  disableGlobbing: false,
+
+	  usePolling: true,
+	  interval: 100,
+	  binaryInterval: 300,
+	  alwaysStat: false,
+	  depth: 99,
+	  awaitWriteFinish: {
+	    stabilityThreshold: 2000,
+	    pollInterval: 100
+	  }
 	});
+	watcher.on('add',fullpath=>{
+		if(fullpath.includes(".scss")){
+			console.log(`${fullpath} has been added`);
+			convertFromScssToCss(fullpath);		
+		}
+	})
+	watcher.on('change',fullpath=>{
+		if(fullpath.includes(".scss")){
+			console.log(`${fullpath} has been changed`);
+			convertFromScssToCss(fullpath);
+		}
+	})
 }
-module.exports=findNConvertInPresentAndChildFolders;
+module.exports=findNConvertInPresentAndSubFolders;
