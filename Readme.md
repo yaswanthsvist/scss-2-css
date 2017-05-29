@@ -12,8 +12,10 @@ import { Component } from '@angular/core';
  styleUrls: ['./payment.component.css'] //use generated css
 })
  ```
-
-
+#installing
+```
+npm install --save-dev scss-2-css
+```
 #usage
 ```
 var scss2css = require('scss-2-css');
