@@ -12,17 +12,17 @@ import { Component } from '@angular/core';
  styleUrls: ['./payment.component.css'] //use generated css
 })
  ```
-#installing
+# Installing
 ```
 npm install --save-dev scss-2-css
 ```
-#usage
+# Usage
 ```
 var scss2css = require('scss-2-css');
 scss2css("./src")
 ```
 
-#usage with gulp
+# Usage with gulp
 
 ```
 var gulp = require('gulp');
@@ -32,4 +32,3 @@ gulp.task('sass', function () {
 	scss2css("./src")
 });
 ```
-
